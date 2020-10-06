@@ -1,0 +1,15 @@
+version: '3'
+services:
+  db:
+    image: 'mariadb:10.1'
+    restart: always
+    container_name: mariadb
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_HOST: '%'
+    ports:
+      - 4406:3306
+    command:
+      mysqld --innodb-flush-method=littlesync --innodb-use-native-aio=OFF --log_bin=ON
